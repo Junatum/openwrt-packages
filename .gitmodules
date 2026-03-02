@@ -1,4 +1,4 @@
 [submodule "openwrt"]
   path = openwrt
-  url = https://github.com/Beomjun/openwrt.git
+  url = https://github.com/Junatum/openwrt.git
   branch = production

@@ -23,19 +23,19 @@ env:
   PUBLISH_ROOT: public
   FEED_NAME: smartsafehub
 
-  OPENWRT_REPO: Beomjun/openwrt
+  OPENWRT_REPO: Junatum/openwrt
   OPENWRT_REF: production
 
-  SRC_SAFESHIELD_REPO: Beomjun/safeshield
+  SRC_SAFESHIELD_REPO: Junatum/safeshield
   SRC_SAFESHIELD_REF: main
 
-  SRC_LUCI_REPO: Beomjun/luci-app-safeshield
+  SRC_LUCI_REPO: Junatum/luci-app-safeshield
   SRC_LUCI_REF: main
 
-  SRC_SMARTSAFEHUB_REPO: Beomjun/luci-app-smartsafehub
+  SRC_SMARTSAFEHUB_REPO: Junatum/luci-app-smartsafehub
   SRC_SMARTSAFEHUB_REF: main
 
-  SRC_THEME_REPO: Beomjun/luci-theme-smart
+  SRC_THEME_REPO: Junatum/luci-theme-smart
   SRC_THEME_REF: main
 
   CUSTOM_PACKAGES: safeshield luci-app-safeshield luci-app-smartsafehub luci-theme-smart

@@ -35,10 +35,7 @@ env:
   SRC_SMARTSAFEHUB_REPO: Junatum/luci-app-smartsafehub
   SRC_SMARTSAFEHUB_REF: main
 
-  SRC_THEME_REPO: Junatum/luci-theme-smart
-  SRC_THEME_REF: main
-
-  CUSTOM_PACKAGES: safeshield luci-app-safeshield luci-app-smartsafehub luci-theme-smart
+  CUSTOM_PACKAGES: safeshield luci-app-safeshield luci-app-smartsafehub
 
 jobs:
   prepare:
@@ -64,7 +61,6 @@ jobs:
           echo "SRC_SAFESHIELD_REF=${ref}" >> "$GITHUB_ENV"
           echo "SRC_LUCI_REF=${ref}" >> "$GITHUB_ENV"
           echo "SRC_SMARTSAFEHUB_REF=${ref}" >> "$GITHUB_ENV"
-          echo "SRC_THEME_REF=${ref}" >> "$GITHUB_ENV"
 
       - name: Checkout OpenWrt
         uses: actions/checkout@v6
@@ -99,15 +95,6 @@ jobs:
           repository: ${{ env.SRC_SMARTSAFEHUB_REPO }}
           ref: ${{ env.SRC_SMARTSAFEHUB_REF }}
           path: src/luci-app-smartsafehub
-          fetch-depth: 1
-          submodules: false
-
-      - name: Checkout Smart theme source
-        uses: actions/checkout@v6
-        with:
-          repository: ${{ env.SRC_THEME_REPO }}
-          ref: ${{ env.SRC_THEME_REF }}
-          path: src/luci-theme-smart
           fetch-depth: 1
           submodules: false
 
@@ -231,7 +218,7 @@ jobs:
 
           make defconfig
 
-          grep -E 'CONFIG_USE_APK=|CONFIG_SIGNED_PACKAGES=|CONFIG_PACKAGE_(safeshield|luci-app-safeshield|luci-app-smartsafehub|luci-theme-smart)=' .config || true
+          grep -E 'CONFIG_USE_APK=|CONFIG_SIGNED_PACKAGES=|CONFIG_PACKAGE_(safeshield|luci-app-safeshield|luci-app-smartsafehub)=' .config || true
 
       - name: Build packages
         run: |
@@ -283,7 +270,7 @@ jobs:
             if [ -z "${apk_path:-}" ]; then
               echo "ERROR: ${pkg} apk not found under bin/packages or bin/targets"
               echo "== Config =="
-              grep -E 'CONFIG_PACKAGE_(safeshield|luci-app-safeshield|luci-app-smartsafehub|luci-theme-smart)=' .config || true
+              grep -E 'CONFIG_PACKAGE_(safeshield|luci-app-safeshield|luci-app-smartsafehub)=' .config || true
               echo "== Built APKs =="
               (find bin/packages bin/targets -type f -name '*.apk' -print || true) | head -n 400 || true
               exit 1

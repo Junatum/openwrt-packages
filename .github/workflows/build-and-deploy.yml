@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Checkout pages repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           submodules: false
@@ -63,7 +63,7 @@ jobs:
           echo "SRC_SMARTSAFEHUB_REF=${ref}" >> "$GITHUB_ENV"
 
       - name: Checkout OpenWrt
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.OPENWRT_REPO }}
           ref: ${{ env.OPENWRT_REF }}
@@ -72,7 +72,7 @@ jobs:
           submodules: false
 
       - name: Checkout SafeShield source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.SRC_SAFESHIELD_REPO }}
           ref: ${{ env.SRC_SAFESHIELD_REF }}
@@ -81,7 +81,7 @@ jobs:
           submodules: false
 
       - name: Checkout LuCI app source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.SRC_LUCI_REPO }}
           ref: ${{ env.SRC_LUCI_REF }}
@@ -90,7 +90,7 @@ jobs:
           submodules: false
 
       - name: Checkout SmartSafeHub LuCI app source
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.SRC_SMARTSAFEHUB_REPO }}
           ref: ${{ env.SRC_SMARTSAFEHUB_REF }}
@@ -340,7 +340,7 @@ jobs:
 
     steps:
       - name: Checkout pages repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
           submodules: false

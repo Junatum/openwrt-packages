@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "architecture": "mipsel_24kc",
+  "packages": {
+    "luci-app-safeshield": "0.2.0-r1",
+    "luci-app-smartsafehub": "0.2.0-r2",
+    "safeshield": "0.3.10-r34"
+  }
+}

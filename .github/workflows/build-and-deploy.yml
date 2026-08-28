@@ -438,6 +438,7 @@ jobs:
           while IFS= read -r -d '' apk_file; do
             pkg_dir="$(mktemp -d "${extract_root}/pkg.XXXXXX")"
             "${apk_bin}" extract \
+              --allow-untrusted \
               --no-chown \
               --destination "${pkg_dir}" \
               "${apk_file}"

@@ -98,6 +98,61 @@ jobs:
           fetch-depth: 1
           submodules: false
 
+      - name: Reject private keys in custom source trees
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          roots=(
+            src/safeshield
+            src/luci-app-safeshield
+            src/luci-app-smartsafehub
+          )
+
+          echo "Checking custom source trees for private-key files..."
+
+          forbidden_files="$(
+            find "${roots[@]}" -type f \( \
+              -iname 'private-key.pem' \
+              -o -iname '*private*key*.pem' \
+              -o -iname 'id_rsa' \
+              -o -iname 'id_dsa' \
+              -o -iname 'id_ecdsa' \
+              -o -iname 'id_ed25519' \
+            \) -print
+          )"
+
+          if [ -n "${forbidden_files}" ]; then
+            echo "ERROR: private-key-like file found in custom source tree:"
+            printf '%s\n' "${forbidden_files}"
+            exit 1
+          fi
+
+          if grep -RIlE \
+            --exclude-dir=.git \
+            -- '-----BEGIN (ENCRYPTED |RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----' \
+            "${roots[@]}"; then
+            echo "ERROR: private key material found in custom source tree"
+            exit 1
+          fi
+
+          echo "No private key material found in custom source trees."
+
+      - name: Generate SmartSafeHub release metadata
+        run: |
+          set -eux
+          python3 .github/scripts/generate-release-notes.py \
+            --source src/luci-app-smartsafehub \
+            --output release-metadata/luci-app-smartsafehub
+
+      - name: Upload SmartSafeHub release metadata
+        uses: actions/upload-artifact@v7
+        with:
+          name: smartsafehub-release-metadata-${{ env.CHANNEL }}
+          path: release-metadata/luci-app-smartsafehub
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Cache OpenWrt downloads
         uses: actions/cache@v5
         with:
@@ -238,7 +293,7 @@ jobs:
           APK_PRIVATE_KEY_PEM: ${{ secrets.APK_PRIVATE_KEY_PEM }}
           APK_PUBLIC_KEY_PEM: ${{ secrets.APK_PUBLIC_KEY_PEM }}
         run: |
-          set -eux
+          set -euo pipefail
 
           cd openwrt
 
@@ -294,10 +349,15 @@ jobs:
 
           umask 077
 
-          printf '%s\n' "${APK_PRIVATE_KEY_PEM}" > private-key.pem
+          private_key_file="${RUNNER_TEMP}/smartsafehub-apk-private-key.pem"
+          trap 'rm -f "${private_key_file}"' EXIT
+
+          # Never create the private key inside PUBLISH_ROOT.
+          # This step intentionally does not enable xtrace because it handles secrets.
+          printf '%s\n' "${APK_PRIVATE_KEY_PEM}" > "${private_key_file}"
           printf '%s\n' "${APK_PUBLIC_KEY_PEM}" > smartsafehub.pem
 
-          chmod 600 private-key.pem
+          chmod 600 "${private_key_file}"
           chmod 644 smartsafehub.pem
 
           APK_BIN="${GITHUB_WORKSPACE}/openwrt/staging_dir/host/bin/apk"
@@ -307,7 +367,7 @@ jobs:
             --root "${GITHUB_WORKSPACE}/openwrt" \
             --keys-dir "${out}" \
             --allow-untrusted \
-            --sign private-key.pem \
+            --sign "${private_key_file}" \
             --output packages.adb \
             ./*.apk
 
@@ -321,10 +381,73 @@ jobs:
 
           test -s index.json
 
-          rm -f private-key.pem
+          rm -f "${private_key_file}"
+          trap - EXIT
 
           echo "== Published files =="
           find . -maxdepth 1 -type f -print | sort
+
+      - name: Verify repo artifact contains no private keys
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          root="${PUBLISH_ROOT}/${CHANNEL}/packages/${ARCH_DIR}/${FEED_NAME}"
+          apk_bin="${GITHUB_WORKSPACE}/openwrt/staging_dir/host/bin/apk"
+          test -d "${root}"
+          test -x "${apk_bin}"
+
+          scan_tree() {
+            local scan_root="$1"
+            local label="$2"
+            local forbidden_files
+
+            forbidden_files="$(
+              find "${scan_root}" -type f \( \
+                -iname 'private-key.pem' \
+                -o -iname '*private*key*.pem' \
+                -o -iname 'id_rsa' \
+                -o -iname 'id_dsa' \
+                -o -iname 'id_ecdsa' \
+                -o -iname 'id_ed25519' \
+              \) -print
+            )"
+
+            if [ -n "${forbidden_files}" ]; then
+              echo "ERROR: private-key-like file found in ${label}:"
+              printf '%s\n' "${forbidden_files}"
+              return 1
+            fi
+
+            if grep -RIlE \
+              -- '-----BEGIN (ENCRYPTED |RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----' \
+              "${scan_root}"; then
+              echo "ERROR: private key material found in ${label}"
+              return 1
+            fi
+          }
+
+          echo "Checking ${root} before artifact upload..."
+          scan_tree "${root}" "repo artifact"
+
+          # Also inspect package payloads. A future packaging mistake could put a
+          # private key inside an .apk even when the repo directory itself is clean.
+          extract_root="$(mktemp -d "${RUNNER_TEMP}/smartsafehub-apk-scan.XXXXXX")"
+          trap 'rm -rf "${extract_root}"' EXIT
+
+          while IFS= read -r -d '' apk_file; do
+            pkg_dir="$(mktemp -d "${extract_root}/pkg.XXXXXX")"
+            "${apk_bin}" extract \
+              --no-chown \
+              --destination "${pkg_dir}" \
+              "${apk_file}"
+            scan_tree "${pkg_dir}" "APK payload: $(basename "${apk_file}")"
+          done < <(find "${root}" -maxdepth 1 -type f -name '*.apk' -print0)
+
+          rm -rf "${extract_root}"
+          trap - EXIT
+
+          echo "Repo artifact and APK payload private-key checks passed."
 
       - name: Upload repo artifact
         uses: actions/upload-artifact@v7
@@ -336,7 +459,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [prepare, build]
 
     steps:
       - name: Checkout pages repo
@@ -352,12 +475,20 @@ jobs:
           path: ${{ env.PUBLISH_ROOT }}_tmp
           merge-multiple: false
 
+      - name: Download SmartSafeHub release metadata
+        uses: actions/download-artifact@v7
+        with:
+          name: smartsafehub-release-metadata-${{ env.CHANNEL }}
+          path: release-metadata/luci-app-smartsafehub
+
       - name: Merge artifacts into public
         run: |
           set -eux
 
           rm -rf "${PUBLISH_ROOT}"
-          mkdir -p "${PUBLISH_ROOT}/${CHANNEL}/packages"
+          mkdir -p \
+            "${PUBLISH_ROOT}/${CHANNEL}/packages" \
+            "${PUBLISH_ROOT}/${CHANNEL}/releases/luci-app-smartsafehub"
 
           for d in "${PUBLISH_ROOT}_tmp"/*; do
             [ -d "$d" ] || continue
@@ -372,13 +503,52 @@ jobs:
             rsync -a --delete "$d/." "${dest}/"
           done
 
+          rsync -a --delete \
+            "release-metadata/luci-app-smartsafehub/." \
+            "${PUBLISH_ROOT}/${CHANNEL}/releases/luci-app-smartsafehub/"
+
           echo "== Final apk repo files =="
           find "${PUBLISH_ROOT}" -maxdepth 6 \( \
             -name '*.apk' \
             -o -name 'packages.adb' \
-            -o -name 'index.json' \
+            -o -name '*.json' \
             -o -name '*.pem' \
           \) -print | sort
+
+      - name: Verify public tree contains no private keys
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -d "${PUBLISH_ROOT}"
+
+          echo "Checking final ${PUBLISH_ROOT} tree before gh-pages deployment..."
+
+          forbidden_files="$(
+            find "${PUBLISH_ROOT}" -type f \( \
+              -iname 'private-key.pem' \
+              -o -iname '*private*key*.pem' \
+              -o -iname 'id_rsa' \
+              -o -iname 'id_dsa' \
+              -o -iname 'id_ecdsa' \
+              -o -iname 'id_ed25519' \
+            \) -print
+          )"
+
+          if [ -n "${forbidden_files}" ]; then
+            echo "ERROR: private-key-like file found in publish tree:"
+            printf '%s\n' "${forbidden_files}"
+            exit 1
+          fi
+
+          if grep -RIlE \
+            -- '-----BEGIN (ENCRYPTED |RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----' \
+            "${PUBLISH_ROOT}"; then
+            echo "ERROR: private key material found in publish tree"
+            exit 1
+          fi
+
+          echo "Final publish tree private-key check passed."
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

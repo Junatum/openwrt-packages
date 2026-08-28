@@ -3,7 +3,7 @@
   "architecture": "aarch64_cortex-a53",
   "packages": {
     "luci-app-safeshield": "0.2.0-r1",
-    "luci-app-smartsafehub": "0.2.2-r1",
+    "luci-app-smartsafehub": "0.2.3-r2",
     "safeshield": "0.3.11-r35"
   }
 }

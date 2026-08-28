@@ -13,6 +13,7 @@ HEADER_RE = re.compile(r"^## \[([^\]]+)\] - (\d{4}-\d{2}-\d{2})$")
 SECTION_RE = re.compile(r"^###\s+(.+?)\s*$")
 SAFE_VERSION_RE = re.compile(r"^[A-Za-z0-9._~+-]+$")
 MAX_RELEASE_NOTE_BYTES = 65536
+MAX_RELEASE_INDEX_BYTES = 65536
 
 
 @dataclass
@@ -128,13 +129,24 @@ def write_release_notes(source: Path, output: Path) -> str:
         raise ValueError(
             f"CHANGELOG.md does not contain current package release {expected}"
         )
+    if not releases or releases[0].version != expected:
+        raise ValueError(
+            f"current package release {expected} must be the first CHANGELOG.md release"
+        )
 
     if output.exists():
         shutil.rmtree(output)
     output.mkdir(parents=True, exist_ok=True)
 
+    seen_versions: set[str] = set()
+    release_index: list[dict[str, str]] = []
+
     for release in releases:
         validate_release(release)
+        if release.version in seen_versions:
+            raise ValueError(f"duplicate release version in CHANGELOG.md: {release.version}")
+        seen_versions.add(release.version)
+
         destination = output / f"{release.version}.json"
         rendered = json.dumps(release.as_json(), ensure_ascii=False, indent=2) + "\n"
         encoded = rendered.encode("utf-8")
@@ -143,6 +155,20 @@ def write_release_notes(source: Path, output: Path) -> str:
                 f"release {release.version} JSON exceeds {MAX_RELEASE_NOTE_BYTES} bytes"
             )
         destination.write_bytes(encoded)
+        release_index.append({"version": release.version, "date": release.date})
+
+    index_payload = {
+        "schema_version": 1,
+        "package": PACKAGE,
+        "releases": release_index,
+    }
+    index_rendered = json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n"
+    index_encoded = index_rendered.encode("utf-8")
+    if len(index_encoded) > MAX_RELEASE_INDEX_BYTES:
+        raise ValueError(
+            f"release index JSON exceeds {MAX_RELEASE_INDEX_BYTES} bytes"
+        )
+    (output / "index.json").write_bytes(index_encoded)
 
     return expected
 
@@ -157,7 +183,11 @@ def main() -> int:
 
     expected = write_release_notes(args.source, args.output)
     generated = sorted(path.name for path in args.output.glob("*.json"))
-    print(f"Generated {len(generated)} release note file(s); current={expected}")
+    release_count = len([name for name in generated if name != "index.json"])
+    print(
+        f"Generated {release_count} release note file(s) and index.json; "
+        f"current={expected}"
+    )
     for name in generated:
         print(name)
     return 0

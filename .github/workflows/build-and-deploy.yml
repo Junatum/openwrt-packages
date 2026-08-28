@@ -144,6 +144,7 @@ jobs:
           python3 .github/scripts/generate-release-notes.py \
             --source src/luci-app-smartsafehub \
             --output release-metadata/luci-app-smartsafehub
+          test -s release-metadata/luci-app-smartsafehub/index.json
 
       - name: Upload SmartSafeHub release metadata
         uses: actions/upload-artifact@v7

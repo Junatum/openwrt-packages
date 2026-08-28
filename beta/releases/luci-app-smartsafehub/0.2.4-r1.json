@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.4-r1",
+  "date": "2026-08-28",
+  "summary": "safeshield의 성능 개선 버전인 0.3.13 버전을 기본 버전으로 설정하였습니다.",
+  "sections": [
+    {
+      "title": "성능",
+      "items": [
+        "safeshield의 최소 버전을 0.3.13로 올렸습니다."
+      ]
+    }
+  ]
+}

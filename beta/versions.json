@@ -2,8 +2,8 @@
   "schema_version": 1,
   "channel": "beta",
   "packages": {
-    "luci-app-smartsafehub": "0.2.3-r2",
-    "safeshield": "0.3.12-r2",
+    "luci-app-smartsafehub": "0.2.4-r1",
+    "safeshield": "0.3.13-r1",
     "luci-app-safeshield": "0.2.0-r1"
   }
 }

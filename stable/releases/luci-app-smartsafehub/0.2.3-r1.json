@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.3-r1",
+  "date": "2026-08-28",
+  "summary": "SmartSafeHub 업데이트 화면에서 새 버전의 릴리즈 노트를 함께 확인할 수 있도록 저장소 릴리즈 메타데이터 연동을 추가했습니다.",
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "`packages.adb`에서 `luci-app-smartsafehub` 새 버전을 확인한 뒤 같은 release channel의 `releases/luci-app-smartsafehub/<version>.json`을 표시용 메타데이터로 가져옵니다.",
+        "릴리즈 노트는 `/tmp/smartsafehub-release-note.json`에 atomic cache하며 업데이트 버전과 일치하는 JSON만 rpcd가 반환합니다.",
+        "업데이트 화면에 릴리즈 요약, 배포일과 섹션별 변경 사항을 표시하고 홈 업데이트 배너에도 요약을 노출합니다.",
+        "SmartSafeHub가 직접 릴리즈 메타데이터를 내려받으므로 `uclient-fetch`를 runtime dependency로 추가했습니다."
+      ]
+    },
+    {
+      "title": "안전성",
+      "items": [
+        "릴리즈 노트 JSON은 화면 표시용 보조 정보이며 업데이트 가능 여부와 설치 대상은 계속 APK 저장소 메타데이터를 기준으로 결정합니다.",
+        "릴리즈 노트 다운로드나 JSON 파싱이 실패해도 업데이트 확인과 `apk add --upgrade luci-app-smartsafehub` 설치 흐름은 계속 동작합니다.",
+        "rpcd는 schema, package, version을 검증하고 문자열·섹션·항목 길이를 제한한 뒤 프런트엔드에 전달합니다.",
+        "updater는 등록된 `repo.smartsafehub.com/<channel>/packages/.../smartsafehub/packages.adb` URL에서 channel base를 유도하므로 stable과 beta를 별도 설정하지 않습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "mock `uclient-fetch`를 추가해 저장소 URL에서 릴리즈 노트 URL을 올바르게 유도하는지 검증합니다.",
+        "릴리즈 노트 다운로드 실패가 업데이트 확인 실패로 전파되지 않는 fail-open 동작을 검증합니다.",
+        "설치 완료 후 이전 릴리즈 노트 cache가 제거되는지 검증합니다."
+      ]
+    }
+  ]
+}

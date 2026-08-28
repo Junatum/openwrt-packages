@@ -509,6 +509,14 @@ jobs:
             "release-metadata/luci-app-smartsafehub/." \
             "${PUBLISH_ROOT}/${CHANNEL}/releases/luci-app-smartsafehub/"
 
+          python3 .github/scripts/generate-package-versions.py \
+            --packages-root "${PUBLISH_ROOT}/${CHANNEL}/packages" \
+            --feed "${FEED_NAME}" \
+            --channel "${CHANNEL}" \
+            --output "${PUBLISH_ROOT}/${CHANNEL}/versions.json"
+
+          test -s "${PUBLISH_ROOT}/${CHANNEL}/versions.json"
+
           echo "== Final apk repo files =="
           find "${PUBLISH_ROOT}" -maxdepth 6 \( \
             -name '*.apk' \

@@ -30,7 +30,9 @@ class ReleaseNote:
     sections: list[ReleaseSection] = field(default_factory=list)
 
     def as_json(self) -> dict[str, object]:
-        summary = " ".join(line.strip() for line in self.summary_lines if line.strip()).strip()
+        summary = " ".join(
+            line.strip() for line in self.summary_lines if line.strip()
+        ).strip()
         return {
             "schema_version": 1,
             "package": PACKAGE,
@@ -97,8 +99,12 @@ def parse_changelog(changelog: Path) -> list[ReleaseNote]:
         if current_section is not None:
             if line.startswith("- "):
                 current_section.items.append(line[2:].strip())
-            elif line.startswith(("  ", "\t")) and line.strip() and current_section.items:
-                current_section.items[-1] = f"{current_section.items[-1]} {line.strip()}"
+            elif (
+                line.startswith(("  ", "\t")) and line.strip() and current_section.items
+            ):
+                current_section.items[-1] = (
+                    f"{current_section.items[-1]} {line.strip()}"
+                )
             continue
 
         stripped = line.strip()
@@ -144,7 +150,9 @@ def write_release_notes(source: Path, output: Path) -> str:
     for release in releases:
         validate_release(release)
         if release.version in seen_versions:
-            raise ValueError(f"duplicate release version in CHANGELOG.md: {release.version}")
+            raise ValueError(
+                f"duplicate release version in CHANGELOG.md: {release.version}"
+            )
         seen_versions.add(release.version)
 
         destination = output / f"{release.version}.json"
@@ -165,9 +173,7 @@ def write_release_notes(source: Path, output: Path) -> str:
     index_rendered = json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n"
     index_encoded = index_rendered.encode("utf-8")
     if len(index_encoded) > MAX_RELEASE_INDEX_BYTES:
-        raise ValueError(
-            f"release index JSON exceeds {MAX_RELEASE_INDEX_BYTES} bytes"
-        )
+        raise ValueError(f"release index JSON exceeds {MAX_RELEASE_INDEX_BYTES} bytes")
     (output / "index.json").write_bytes(index_encoded)
 
     return expected

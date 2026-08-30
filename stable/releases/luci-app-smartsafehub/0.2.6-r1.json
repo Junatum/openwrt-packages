@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.6-r1",
+  "date": "2026-08-30",
+  "summary": "safeshield의 최소 버전을 0.3.15 이상으로 설정하였습니다.",
+  "sections": []
+}

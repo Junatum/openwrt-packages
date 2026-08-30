@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.5-r1",
+  "date": "2026-08-29",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "SafeShield 페이지에 로컬 DNS 통계 카드를 추가해 전체 DNS 요청, 차단 요청, 차단율, 현재 시간 차단 수를 표시합니다.",
+        "최근 24시간의 시간대별 차단 요청을 외부 차트 라이브러리 없이 경량 막대 그래프로 표시합니다.",
+        "`safeshield statistics` RPC를 60초 간격으로 별도 polling하고 브라우저 탭이 숨겨져 있을 때는 기존 resource hook 정책에 따라 polling을 중지합니다.",
+        "SafeShield 통계 RPC 읽기 ACL과 UI/RPC 연결 계약 테스트를 추가합니다."
+      ]
+    },
+    {
+      "title": "변경",
+      "items": [
+        "통계 collector lifecycle 수정이 포함된 SafeShield `0.3.14-r2` 이상을 최소 의존성으로 요구합니다.",
+        "APK dependency 문법에 맞게 `EXTRA_DEPENDS`의 버전 조건에서 연산자 뒤 공백을 제거합니다."
+      ]
+    }
+  ]
+}

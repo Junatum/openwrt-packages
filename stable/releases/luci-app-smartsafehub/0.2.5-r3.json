@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.5-r3",
+  "date": "2026-08-29",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "SafeShield 통계 화면에 기기별 DNS 요청, 차단 수와 차단율을 표시합니다.",
+        "DHCP lease로 식별된 기기는 hostname, 현재 IP와 MAC 주소를 함께 보여주고, lease가 없는 기기는 IP 임시 식별 상태로 표시합니다.",
+        "SafeShield가 개별 기기 추적 한도를 초과한 경우 `기타 기기` 합산과 추적 한도 안내를 표시합니다."
+      ]
+    },
+    {
+      "title": "변경",
+      "items": [
+        "기기별 통계와 AWK array 초기화 안정성 수정이 포함된 SafeShield `0.3.14-r7` 이상을 최소 의존성으로 요구합니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "통계 RPC의 `devices`, `device_limit`, `devices_truncated` 정규화와 기기별 통계 UI 연결을 계약 테스트에 추가합니다."
+      ]
+    }
+  ]
+}

@@ -4,6 +4,6 @@
   "packages": {
     "luci-app-safeshield": "0.2.2-r1",
     "luci-app-smartsafehub": "0.2.6-r1",
-    "safeshield": "0.3.15-r1"
+    "safeshield": "0.3.15-r2"
   }
 }

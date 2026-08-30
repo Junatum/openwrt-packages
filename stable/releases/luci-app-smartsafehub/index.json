@@ -3,6 +3,14 @@
   "package": "luci-app-smartsafehub",
   "releases": [
     {
+      "version": "0.2.6-r3",
+      "date": "2026-08-30"
+    },
+    {
+      "version": "0.2.6-r2",
+      "date": "2026-08-30"
+    },
+    {
       "version": "0.2.6-r1",
       "date": "2026-08-30"
     },

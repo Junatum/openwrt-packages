@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.8-r6",
+  "date": "2026-09-02",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "데스크톱 사이드바 접기/펼치기 버튼을 화면 중앙에서 브랜드 헤더 하단과 사이드바 오른쪽 경계선이 만나는 위치로 이동했습니다.",
+        "토글 버튼에 SmartSafeHub 포인트 컬러 배경과 흰색 아이콘, 강조 shadow를 적용해 라이트/다크 모드 모두에서 더 쉽게 식별할 수 있도록 개선했습니다."
+      ]
+    }
+  ]
+}

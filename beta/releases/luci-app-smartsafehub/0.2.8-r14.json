@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.8-r14",
+  "date": "2026-09-03",
+  "summary": null,
+  "sections": [
+    {
+      "title": "변경",
+      "items": [
+        "Light/Dark Mode 전환을 사이드바 시스템 메뉴에서 제거하고 데스크톱 상단 새로고침 액션 옆의 아이콘 버튼으로 이동해 전역 화면 설정이라는 의미를 명확하게 했습니다.",
+        "모바일에서는 테마 전환 아이콘을 햄버거 메뉴 바로 왼쪽에 배치해 메뉴를 열지 않고도 테마를 즉시 변경할 수 있도록 개선했습니다.",
+        "테마 전환은 텍스트 없이 Sun/Moon 아이콘만 표시하되 `aria-label`, `title`을 유지해 접근성을 보존합니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "데스크톱 헤더와 모바일 상단 내비게이션의 테마 토글 위치, 사이드바/모바일 drawer 내부의 중복 테마 액션 제거를 navigation contract에서 검증합니다."
+      ]
+    }
+  ]
+}

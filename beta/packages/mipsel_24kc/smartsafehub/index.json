@@ -3,7 +3,7 @@
   "architecture": "mipsel_24kc",
   "packages": {
     "luci-app-safeshield": "0.2.2-r3",
-    "luci-app-smartsafehub": "0.2.8-r6",
+    "luci-app-smartsafehub": "0.2.8-r15",
     "safeshield": "0.3.19-r1"
   }
 }

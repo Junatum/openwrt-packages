@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.9-r1",
+  "date": "2026-09-03",
+  "summary": null,
+  "sections": [
+    {
+      "title": "변경",
+      "items": [
+        "전체 레이아웃 구조를 변경하여 사용성과 메뉴 접근성을 향상시켰습니다.",
+        "다크 모드에 대한 지원을 추가하였습니다."
+      ]
+    }
+  ]
+}

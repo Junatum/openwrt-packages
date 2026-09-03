@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.8-r2",
+  "date": "2026-09-02",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "데스크톱 AppShell에서 좌측 사이드바와 콘텐츠 영역을 2열 grid로 배치하도록 수정했습니다.",
+        "ProductNavigation이 콘텐츠 `<main>` 내부에서 전체 너비를 차지해 Dashboard가 아래로 밀리던 레이아웃 회귀를 수정했습니다.",
+        "헤더와 Dashboard를 우측 workspace에 함께 배치해 사이드바가 화면 왼쪽에 고정되는 구조를 복원했습니다."
+      ]
+    }
+  ]
+}

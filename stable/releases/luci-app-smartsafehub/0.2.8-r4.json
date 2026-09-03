@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.8-r4",
+  "date": "2026-09-02",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "데스크톱 좌측 사이드바를 16rem 확장 상태와 5rem 축소 상태로 전환하는 접기/펼치기 기능을 추가했습니다.",
+        "축소 상태에서도 SmartSafeHub 로고 마크를 항상 유지하고, 메뉴는 아이콘 중심의 compact navigation으로 표시합니다.",
+        "라이트/다크 모드 전환 기능을 추가하고 선택한 테마를 브라우저 `localStorage`에 저장합니다.",
+        "저장된 테마가 없으면 브라우저의 `prefers-color-scheme` 설정을 초기값으로 사용합니다.",
+        "모바일 메뉴에도 동일한 테마 전환 기능을 제공합니다."
+      ]
+    }
+  ]
+}

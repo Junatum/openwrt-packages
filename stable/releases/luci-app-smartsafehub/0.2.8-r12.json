@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.8-r12",
+  "date": "2026-09-03",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "Dashboard에 SafeShield 최근 24시간 차단 활동 차트를 추가해 보호 동작 추이를 첫 화면에서 바로 확인할 수 있도록 했습니다.",
+        "차트와 함께 최근 24시간 DNS 요청, 차단 수와 차단율을 요약하고 현재 WAN/연결 기기 구성을 나란히 표시하는 네트워크 보호 활동 영역을 추가했습니다."
+      ]
+    },
+    {
+      "title": "변경",
+      "items": [
+        "Dashboard의 SafeShield statistics 조회는 진입 시 한 번만 수행하고 사용자가 새로고침할 때만 다시 조회하도록 구성해 상세 SafeShield 페이지의 60초 polling이 Dashboard로 확장되지 않도록 했습니다.",
+        "연결 기기 one-shot 조회가 `exactOptionalPropertyTypes` 설정과 호환되도록 polling 비활성화 시 `pollInterval` 프로퍼티 자체를 생략하도록 정리했습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "Dashboard 차트 재사용, SafeShield statistics one-shot 조회, 통합 새로고침과 polling 비활성화 계약을 검증하도록 Dashboard UI contract 테스트를 보강했습니다."
+      ]
+    }
+  ]
+}

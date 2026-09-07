@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.10-r1",
+  "date": "2026-09-07",
+  "summary": null,
+  "sections": [
+    {
+      "title": "변경",
+      "items": [
+        "새로고침 아이콘을 개선하고 전체적으로 통일성 있게 적용하였습니다.",
+        "업데이트를 확인하는 로직을 수정하였습니다."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.9-r4",
+  "date": "2026-09-07",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "릴리즈 노트 채널을 전체 APK repository 목록의 탐색 순서로 결정하지 않고 SmartSafeHub 설정에 저장 된 channel URL에서 직접 결정하도록 수정했습니다.",
+        "stable에서 beta로 전환한 뒤 다른 repository 파일에 stable URL이 남아 있어도 beta 채널의 릴리즈 인덱스와 릴리즈 노트만 조회하도록 수정했습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "별도의 repository 파일에 stable URL이 먼저 존재하고 `smartsafehub.list`는 beta를 가리키는 전환 시나리오에서 beta 릴리즈 노트 경로만 사용하는 회귀 테스트를 추가했습니다."
+      ]
+    }
+  ]
+}

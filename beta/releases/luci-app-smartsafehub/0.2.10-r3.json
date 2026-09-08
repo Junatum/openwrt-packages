@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.10-r3",
+  "date": "2026-09-08",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "수동 업데이트 확인을 시작한 뒤 백엔드가 `checking` 상태인 동안 1초 간격으로 상태를 다시 조회하고, 확인 작업이 `idle` 또는 `error`로 끝나는 즉시 화면에 최종 상태와 버전 정보를 반영하도록 수정했습니다.",
+        "평상시에는 기존 5분 background polling을 유지하고 실제 설치 중에는 기존 3초 polling을 유지해, 업데이트 확인 중에만 짧은 polling이 추가되도록 했습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "업데이트 확인 단계가 1초 polling을 사용하고 설치 단계의 3초 polling 및 idle 상태의 5분 polling과 구분되는지 UI contract에서 검증합니다."
+      ]
+    }
+  ]
+}

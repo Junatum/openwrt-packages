@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.12-r1",
+  "date": "2026-09-09",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "업데이트 기능을 개선하였습니다.",
+        "성능 개선이 포함되었습니다."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 name: Build & Publish custom apk repo
 
+run-name: APK repo [${{ github.event_name == 'schedule' && 'beta' || inputs.channel || 'stable' }}] by @${{ github.actor }}
+
 on:
   workflow_dispatch:
     inputs:

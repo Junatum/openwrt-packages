@@ -3,7 +3,7 @@
   "architecture": "x86_64",
   "packages": {
     "luci-app-safeshield": "0.2.2-r4",
-    "luci-app-smartsafehub": "0.2.12-r3",
+    "luci-app-smartsafehub": "0.2.12-r4",
     "safeshield": "0.3.21-r1"
   }
 }

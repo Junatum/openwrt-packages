@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.13-r1",
+  "date": "2026-09-10",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "자동 업데이트 관련 UI 및 사용성을 개선하였습니다.",
+        "로그인 세션이 만료 되었을때, 사용자에게 안내를 하고 로그인 페이지로 이동하도록 하였습니다.",
+        "일부 UI에 대한 시인성을 개선하였습니다."
+      ]
+    }
+  ]
+}

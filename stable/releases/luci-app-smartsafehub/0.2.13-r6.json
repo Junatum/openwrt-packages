@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.13-r6",
+  "date": "2026-09-12",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "SafeShield 유료 멤버십 badge를 고대비 premium 스타일로 재설계했습니다. `ULTIMATE`는 dark-gold 기반 metallic gradient, 밝은 gold border/glow, jewel-style mark와 은은한 shine 효과를 적용해 라이트·다크 테마 모두에서 즉시 눈에 띄도록 개선했습니다.",
+        "`PRO`와 기타 유료 플랜도 각각 teal 및 blue jewel-tone gradient로 대비를 강화하고, `멤버십 활성` 상태를 tier 색상의 작은 status pill로 표시해 유료 상태를 badge와 함께 명확하게 인지할 수 있도록 했습니다.",
+        "모션 감소 설정에서는 ULTIMATE shine 애니메이션을 비활성화하여 접근성을 유지합니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "SafeShield 페이지 계약 테스트에 premium badge의 high-contrast 색상, ULTIMATE shine keyframe, tier별 활성 caption 및 reduced-motion 대응이 소스와 체크인된 CSS에 유지되는지 검증을 추가했습니다."
+      ]
+    }
+  ]
+}

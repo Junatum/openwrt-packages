@@ -3,7 +3,7 @@
   "channel": "beta",
   "packages": {
     "luci-app-smartsafehub": "0.2.14-r11",
-    "safeshield": "0.3.22-r4",
+    "safeshield": "0.3.23-r1",
     "luci-app-safeshield": "0.2.2-r4"
   }
 }

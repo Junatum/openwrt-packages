@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.15-r20",
+  "date": "2026-09-17",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "LAN 전용 `smartsafehub_network` RPC가 등록되지 않아 LAN 화면에서 `요청한 리소스를 찾을 수 없습니다.`가 표시되던 문제를 수정했습니다. 원인은 `network-management.uc`의 `export function` 선언 세 곳이 ucode 문법상 필요한 `};` 대신 `}`로 끝나 모듈 컴파일이 실패하던 것이었습니다.",
+        "`read_lan_settings`, `update_lan_settings`, `apply_recommended_lan` export 함수를 기존 SmartSafeHub ucode 모듈과 동일한 종료 형식으로 수정해 `smartsafehub-network.uc`가 정상적으로 import 및 등록될 수 있도록 했습니다."
+      ]
+    },
+    {
+      "title": "테스트 및 문서",
+      "items": [
+        "LAN 계약 테스트에 export 함수 종료 문법 검사를 추가해 `};` 누락을 개발 환경에서도 감지하도록 했습니다.",
+        "특정 LAN 진입점만 선택적으로 검사하던 방식에 더해 `tests/test-ucode-syntax.sh`를 추가했습니다. 실제 `ucode -c`로 모든 rpcd 최상위 진입점을 컴파일하고, 합성 모듈에서 `smartsafehub/` 아래의 모든 재사용 모듈을 import해 현재 호출되지 않는 모듈까지 문법 오류를 검사합니다.",
+        "Backend CI가 OpenWrt 25.12와 동일 계열인 ucode `2026.01.16~85922056` 소스 revision(`8592205`)을 직접 빌드하고 `SMARTSAFEHUB_REQUIRE_UCODE=1`로 실제 컴파일 검사를 필수화했습니다. 로컬에 ucode가 없어 검사가 건너뛰어져도 CI에서는 누락을 허용하지 않습니다.",
+        "host ucode에는 OpenWrt 전용 `ubus`/`uci` 동적 모듈이 없으므로 테스트 전용 최소 import stub으로 이름 해석만 제공하고, SmartSafeHub의 실제 ucode 소스와 상대 import graph는 대상 컴파일러가 그대로 검사하도록 했습니다.",
+        "과거 장애와 동일한 `export function`의 세미콜론 누락 코드를 테스트 중 의도적으로 컴파일해 대상 ucode 컴파일러가 이를 거부하는지도 확인합니다.",
+        "LAN 기능 계약 테스트에서 별도로 실행하던 raw `ucode -c`를 제거했습니다. Host CI의 ucode에는 OpenWrt 전용 `ubus`/`uci`/`fs` 모듈이 없어 실제 소스 문법과 무관하게 import 해석에서 실패할 수 있으므로, 실제 컴파일은 전용 `test-ucode-syntax.sh`가 stub module search path를 구성한 뒤 단일하게 담당합니다.",
+        "정적 검증에 회귀 계약을 추가해 다른 기능별 테스트가 다시 raw `ucode -c`를 추가하지 못하도록 했습니다.",
+        "README의 ucode 진단 및 배포 전 검사 절차를 새 CI 컴파일 계약에 맞게 갱신했습니다."
+      ]
+    }
+  ]
+}

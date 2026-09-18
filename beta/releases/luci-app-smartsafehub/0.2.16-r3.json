@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.16-r3",
+  "date": "2026-09-18",
+  "summary": null,
+  "sections": [
+    {
+      "title": "테스트 안정성",
+      "items": [
+        "`tests/test-license.sh`의 라이선스 mock 상태를 각 시나리오 시작 전에 명시적으로 초기화하도록 변경해 macOS `/bin/sh`를 포함한 셸 구현 차이로 이전 실패 시나리오의 `MOCK_*` 값이 다음 stale-lock 복구 테스트에 영향을 주지 않도록 했습니다.",
+        "stale activation lock 복구 시나리오는 `license_get`과 Hub status mock을 정상 상태로 명시한 뒤 lock 제거, 임시 activation request 정리, `/licenses/status` 재개까지 독립적으로 검증합니다."
+      ]
+    }
+  ]
+}

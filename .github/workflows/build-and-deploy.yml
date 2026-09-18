@@ -41,7 +41,7 @@ env:
 
 jobs:
   prepare:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout pages repo
@@ -219,7 +219,7 @@ jobs:
           retention-days: 1
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: prepare
 
     strategy:
@@ -462,7 +462,7 @@ jobs:
           retention-days: 7
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [prepare, build]
 
     steps:
@@ -572,7 +572,7 @@ jobs:
 
   notify:
     name: Notify Slack
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [prepare, build, deploy]
     if: ${{ always() }}
 

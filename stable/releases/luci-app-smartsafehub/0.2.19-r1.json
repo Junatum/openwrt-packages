@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.19-r1",
+  "date": "2026-09-20",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "select box의 커스텀하여, popup 위치의 일관성을 올렸고 사용성도 개선하였습니다."
+      ]
+    },
+    {
+      "title": "수정",
+      "items": [
+        "예약 재부팅 기능이 시작되지 않던 버그를 수정하였습니다."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.18-r2",
+  "date": "2026-09-20",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "실제 기기에서 border가 보이지 않는 문제를 수정하였습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "다시 border 관련 문제가 발생하지 않도록 회귀 테스트 코드를 추가하였습니다."
+      ]
+    }
+  ]
+}

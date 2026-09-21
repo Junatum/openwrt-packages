@@ -26,7 +26,7 @@
       "title": "테스트 및 문서",
       "items": [
         "IPTV RPC/ACL, IGMP Proxy·IGMP snooping 구성, rollback, 서비스 lifecycle, Beta UI, SKB/LG U+ 선택 제한을 검증하는 회귀 테스트를 추가했습니다.",
-        "README에 IPTV Beta 기능, 의존성, 적용 방식과 현재 지원 범위를 문서화했습니다. 프런트엔드 빌드 산출물은 생성하지 않습니다."
+        "README에 IPTV Beta 기능, 의존성, 적용 방식과 현재 지원 범위를 문서화했습니다."
       ]
     }
   ]

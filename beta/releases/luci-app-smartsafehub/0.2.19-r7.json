@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.19-r7",
+  "date": "2026-09-21",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "대시보드와 SafeShield 화면의 최근 24시간 통계에서 `차단` 수치를 동일한 teal 강조색으로 표시하도록 통일했습니다. DNS 요청 수와 차단율은 기존 기본 색상을 유지해 SafeShield가 실제로 처리한 차단 결과를 가장 먼저 인지할 수 있도록 정보 우선순위를 정리했습니다.",
+        "다크 모드에서도 기존 SmartSafeHub 테마 매핑을 사용해 차단 수치가 밝은 teal로 자연스럽게 표시됩니다."
+      ]
+    },
+    {
+      "title": "테스트 및 문서",
+      "items": [
+        "대시보드와 SafeShield 통계 계약 테스트에 최근 24시간 차단 수만 `text-teal-700` 강조를 사용하고, DNS 요청 및 차단율은 기본 텍스트 색상을 유지하는 회귀 검증을 추가했습니다.",
+        "README에 대시보드/SafeShield 차단 수치 강조 정책을 문서화했습니다."
+      ]
+    }
+  ]
+}

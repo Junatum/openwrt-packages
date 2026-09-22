@@ -18,7 +18,7 @@
       "items": [
         "모든 frontend source에서 native `<select>`가 다시 추가되지 않는지, 공통 dropdown의 listbox/option 접근성·팝업 위치 보정·Shadow DOM 외부 클릭 처리·라이트/다크 모드 계약을 검증하는 회귀 테스트를 추가했습니다.",
         "기존 Wi-Fi, 시스템 시간, 업데이트 UI 계약을 native select 스타일 검사 대신 공통 `CustomSelect` 사용 여부를 검증하도록 갱신했습니다.",
-        "README의 선택 컨트롤 설명을 공통 커스텀 드롭다운 동작에 맞게 갱신했습니다. 프런트엔드 빌드 산출물은 생성하지 않습니다."
+        "README의 선택 컨트롤 설명을 공통 커스텀 드롭다운 동작에 맞게 갱신했습니다."
       ]
     }
   ]

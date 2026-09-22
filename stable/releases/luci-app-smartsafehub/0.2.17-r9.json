@@ -16,7 +16,7 @@
     {
       "title": "테스트 및 문서",
       "items": [
-        "`tests/test-safeshield-page-contract.sh`에 정적 ULTIMATE/PRO/기타 유료 플랜 surface, glow·shine 제거, 다크 모드 ULTIMATE 규칙 단일 정의를 검증하는 소스 스타일 계약을 추가했습니다. 프런트엔드 빌드 산출물은 패치에서 생성하지 않습니다.",
+        "`tests/test-safeshield-page-contract.sh`에 정적 ULTIMATE/PRO/기타 유료 플랜 surface, glow·shine 제거, 다크 모드 ULTIMATE 규칙 단일 정의를 검증하는 소스 스타일 계약을 추가했습니다.",
         "README의 유료 플랜 표시 설명을 정적인 premium chip 디자인에 맞게 갱신했습니다."
       ]
     }

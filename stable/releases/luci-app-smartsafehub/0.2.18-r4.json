@@ -16,7 +16,7 @@
       "title": "테스트 및 문서",
       "items": [
         "패키지 계약 테스트에 `smartsafehub-maintenance enable`이 항상 포함되고 `PKG_UPGRADE` 또는 기존 enabled 상태에 따라 조건부로 생략되지 않는지 검증하는 회귀 테스트를 추가했습니다.",
-        "README에 maintenance 서비스의 업그레이드 복구 정책과 postinst 서비스 enable 동작을 문서화했습니다. 프런트엔드 빌드 산출물은 생성하지 않습니다."
+        "README에 maintenance 서비스의 업그레이드 복구 정책과 postinst 서비스 enable 동작을 문서화했습니다."
       ]
     }
   ]

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.20-r1",
+  "date": "2026-09-22",
+  "summary": null,
+  "sections": [
+    {
+      "title": "기능",
+      "items": [
+        "최근 활동 기록을 보여주는 기능을 추가하였습니다. 유료 멤버쉽의 경우 Cloud 동기화를 지원합니다."
+      ]
+    },
+    {
+      "title": "개선",
+      "items": [
+        "[Beta] SK Broadband, LG U+ IPTV를 지원하는 기능의 베타 버전으로 추가하였습니다.",
+        "전체적인 UI를 다듬었습니다."
+      ]
+    },
+    {
+      "title": "수정",
+      "items": [
+        "SafeShield refresh 로딩바를 다듬었습니다."
+      ]
+    }
+  ]
+}

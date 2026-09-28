@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.24-r1",
+  "date": "2026-09-28",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "내부 설정 충돌을 해결하였습니다."
+      ]
+    }
+  ]
+}

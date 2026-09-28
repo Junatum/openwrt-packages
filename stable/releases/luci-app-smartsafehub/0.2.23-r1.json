@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.23-r1",
+  "date": "2026-09-28",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "관리자 비밀번호 기능을 추가하고, 초기화 기능도 함께 제공합니다.",
+        "인터넷 설정을 새롭게 추가하고 기존의 LAN 메뉴와 합쳤습니다."
+      ]
+    },
+    {
+      "title": "수정",
+      "items": [
+        "다크 모드에서 일부 UI의 가독성이 떨어진 부분을 수정하였습니다."
+      ]
+    }
+  ]
+}

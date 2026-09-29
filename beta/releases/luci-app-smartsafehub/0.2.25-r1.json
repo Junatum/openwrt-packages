@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.25-r1",
+  "date": "2026-09-29",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "관리자 비밀번호 변경 UI를 개선하였습니다.",
+        "내부 모듈을 정리하였습니다."
+      ]
+    }
+  ]
+}

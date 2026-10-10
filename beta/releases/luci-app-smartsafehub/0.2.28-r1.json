@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.28-r1",
+  "date": "2026-10-10",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "게스트 Wi-Fi 기능을 추가하였습니다.",
+        "Wi-Fi 비밀번호를 QR 코드로 볼 수 있는 기능을 추가하였습니다."
+      ]
+    },
+    {
+      "title": "개선",
+      "items": [
+        "새로운 기기와 계정을 연동하는 프로세스를 적용하였습니다.",
+        "성능 개선을 적용하였습니다.",
+        "사용성 개선을 위해 일부 UI를 변경하였습니다."
+      ]
+    },
+    {
+      "title": "수정",
+      "items": [
+        "SafeShield의 최소 버전을 0.3.25 이상으로 강제합니다."
+      ]
+    }
+  ]
+}

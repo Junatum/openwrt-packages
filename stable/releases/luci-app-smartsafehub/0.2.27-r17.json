@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.27-r17",
+  "date": "2026-10-09",
+  "summary": null,
+  "sections": [
+    {
+      "title": "개선",
+      "items": [
+        "SafeShield 보호 상태 카드의 원형 진행 표시 선 두께를 조금 더 얇게 조정해 단계 숫자가 더 잘 보이도록 했습니다."
+      ]
+    },
+    {
+      "title": "테스트",
+      "items": [
+        "SafeShield 원형 진행 표시의 선 두께가 의도한 값으로 유지되는지 계약 테스트로 확인합니다."
+      ]
+    }
+  ]
+}

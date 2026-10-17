@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.29-r2",
+  "date": "2026-10-17",
+  "summary": null,
+  "sections": [
+    {
+      "title": "수정",
+      "items": [
+        "추천 사용자 규칙을 적용하지 못하는 문제를 수정하였습니다."
+      ]
+    }
+  ]
+}

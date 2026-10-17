@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "package": "luci-app-smartsafehub",
+  "version": "0.2.29-r1",
+  "date": "2026-10-17",
+  "summary": null,
+  "sections": [
+    {
+      "title": "추가",
+      "items": [
+        "추천 사용자 규칙을 적용하는 기능을 제공합니다.",
+        "공유기 웹사이트의 미리보기 기능을 제공합니다."
+      ]
+    },
+    {
+      "title": "개선",
+      "items": [
+        "펌웨어 정보에 관리 소프트웨어의 버전을 표시합니다."
+      ]
+    }
+  ]
+}

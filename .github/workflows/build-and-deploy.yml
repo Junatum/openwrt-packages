@@ -14,9 +14,6 @@ on:
           - beta
         default: stable
 
-  schedule:
-    - cron: "0 15 * * *"
-
 permissions:
   contents: write
 
